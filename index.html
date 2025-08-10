@@ -29,12 +29,16 @@
     .export-content table { font-size: 10.5pt; }
     .export-content h1, .export-content h2 { color: #000 !important; border-color: #000 !important; }
     .export-content .printable-value { font-weight: 600; padding: 0 4px; border-bottom: 1px dotted #333; display: inline; }
-    /* FIX: Changed page-break-inside to be more specific to avoid conflicts */
     .export-content details > div, .export-content section { page-break-inside: avoid; }
     .export-content details { border: none; background: none; }
     .export-content details[open] { display: block; }
     .export-content details > summary { display: none; }
     .export-content .print-title { display: block !important; font-size: 1rem; font-weight: bold; color: #000; margin-top: 1rem; margin-bottom: 0.5rem; padding-bottom: .25rem; border-bottom: 1px solid #ccc; }
+    /* FIX: Ensure RTL list formatting in exported documents */
+    .export-content ul, .export-content ol {
+        list-style-position: outside !important;
+        padding-right: 2em; /* Add indentation for markers */
+    }
     .print-hidden { display: none !important; }
     table, td, th { font-size: 12px; }
     input, textarea, select { font-size: 12px !important; }
