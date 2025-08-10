@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج عقد مقاولة بناء احترافي – نسخة مطوّرة</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/html-to-docx@1.6.0/dist/browser/html-to-docx.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <style>
+    body { font-family: 'Tajawal', sans-serif; background-color: #f0f2f5; font-size: 14px; line-height: 1.55; }
+    h1 { font-size: 1.35rem; }
+    h2 { font-size: 1.05rem; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] summary .accordion-arrow { transform: rotate(180deg); }
+    .export-content { font-size: 11pt; line-height: 1.45; }
+    .export-content h1 { font-size: 1.25rem !important; margin: .5rem 0 !important; }
+    .export-content h2 { font-size: 1.05rem !important; margin: .4rem 0 !important; }
+    .export-content .p-6 { padding: .75rem !important; }
+    .export-content .p-5 { padding: .6rem !important; }
+    .export-content .mb-6 { margin-bottom: .75rem !important; }
+    .export-content .mt-10, .export-content .pt-10 { margin-top: 1rem !important; padding-top: 1rem !important; }
+    .export-content table { font-size: 10.5pt; }
+    .export-content h1, .export-content h2 { color: #000 !important; border-color: #000 !important; }
+    .export-content .printable-value { font-weight: 600; padding: 0 4px; border-bottom: 1px dotted #333; display: inline; }
+    .export-content details { page-break-inside: avoid; border: none; background: none; }
+    .export-content details[open] { display: block; }
+    .export-content details > summary { display: none; }
+    .export-content .print-title { display: block !important; font-size: 1rem; font-weight: bold; color: #000; margin-top: 1rem; margin-bottom: 0.5rem; padding-bottom: .25rem; border-bottom: 1px solid #ccc; }
+    .no-print { display: none !important; }
+    table, td, th { font-size: 12px; }
+    input, textarea, select { font-size: 12px !important; }
+    @media print { body { font-size: 11pt; line-height: 1.45; } }
+  </style>
+</head>
+<body class="text-gray-800">
+  <div class="flex flex-col md:flex-row min-h-screen">
+    <!-- Sidebar -->
+    <nav class="w-full md:w-72 bg-slate-800 text-white p-6 shadow-lg print:hidden">
+      <h2 class="text-2xl font-bold mb-6 border-b border-slate-600 pb-4 text-center">لوحة التحكم</h2>
+      <ul class="space-y-3">
+        <li><a href="#section1" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-file-signature fa-fw mr-3"></i> المقدمة والأطراف</a></li>
+        <li><a href="#section2" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-building fa-fw mr-3"></i> موضوع العقد</a></li>
+        <li><a href="#section3" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-user-tie fa-fw mr-3"></i> التزامات المالك</a></li>
+        <li><a href="#section4" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-hard-hat fa-fw mr-3"></i> التزامات المقاول</a></li>
+        <li><a href="#section5" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-ruler-combined fa-fw mr-3"></i> المواصفات الفنية</a></li>
+        <li><a href="#section6" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-money-bill-wave fa-fw mr-3"></i> الدفعات المالية</a></li>
+        <li><a href="#section7" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-scale-balanced fa-fw mr-3"></i> الضمانات والغرامات</a></li>
+        <li><a href="#section8" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-gavel fa-fw mr-3"></i> أحكام عامة</a></li>
+        <li><a href="#section9" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-paperclip fa-fw mr-3"></i> المرفقات</a></li>
+        <li><a href="#section10" class="flex items-center p-3 rounded-md hover:bg-slate-700 transition-colors"><i class="fa-solid fa-pencil-alt fa-fw mr-3"></i> التوقيعات</a></li>
+      </ul>
+
+      <div class="mt-8 pt-6 border-t border-slate-600 space-y-3">
+        <button id="btnPDF" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center shadow-md">
+          <i class="fa-solid fa-file-pdf mr-3"></i> تصدير كملف PDF
+        </button>
+        <button id="btnGDocs" class="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-700 transition duration-300 flex items-center justify-center shadow-md">
+          <i class="fa-brands fa-google-drive mr-3"></i> تصدير لـ Google Docs
+        </button>
+        <button id="btnSaveHTML" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300 flex items-center justify-center shadow-md">
+          <i class="fa-solid fa-save mr-3"></i> حفظ كملف HTML قابل للتعديل
+        </button>
+        <button id="btnClear" class="w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-amber-700 transition duration-300 flex items-center justify-center shadow-md">
+          <i class="fa-solid fa-broom mr-3"></i> مسح الحقول
+        </button>
+        <div id="gdocs-instruction" class="hidden mt-3 p-3 bg-blue-100 border border-blue-400 text-blue-800 text-sm rounded-lg">
+          <p class="font-bold">تم تنزيل الملف بنجاح!</p>
+          <p>الآن، ارفع الملف داخل Google Docs عبر: ملف &gt; فتح.</p>
+        </div>
+        <p class="text-xs text-slate-300">*يتم الحفظ تلقائيًا في المتصفح.</p>
+      </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="flex-1 p-6 sm:p-10">
+      <div id="contract-form" class="max-w-5xl mx-auto bg-white p-6 sm:p-10 rounded-lg shadow-xl border border-gray-200">
+        <header class="flex items-center justify-between">
+          <h1 class="text-3xl font-bold text-slate-800 mb-4 pb-4 border-b-2 border-blue-500 w-full text-center">عقد مقاولة لإنشاء مبنى سكني</h1>
+        </header>
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+          <label class="block">
+            <span class="text-sm text-slate-600">تاريخ العقد</span>
+            <input type="date" id="contract_date" class="w-full p-2 border rounded" required />
+          </label>
+          <label class="block">
+            <span class="text-sm text-slate-600">مكان التوقيع</span>
+            <input type="text" id="sign_place" class="w-full p-2 border rounded" placeholder="مثال: عبري – محافظة الظاهرة" />
+          </label>
+          <label class="block">
+            <span class="text-sm text-slate-600">مدة التنفيذ (أيام)</span>
+            <input type="number" id="duration_days" class="w-full p-2 border rounded" min="1" placeholder="مثال: 240" />
+          </label>
+        </div>
+
+        <!-- Section 1: Parties -->
+        <details id="section1" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden" open>
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (1): أطراف العقد</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (1): أطراف العقد</h2>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="font-semibold text-gray-600">الطرف الأول (المالك)</label>
+                <input type="text" id="owner_name" class="w-full p-2 border-b-2 border-gray-200 focus:border-blue-500 outline-none bg-transparent" placeholder="اسم المالك الكامل" />
+                <input type="text" id="owner_id" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="رقم الهوية / السجل المدني" />
+                <input type="text" id="owner_address" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="العنوان" />
+                <input type="text" id="owner_phone" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="الهاتف" />
+              </div>
+              <div>
+                <label class="font-semibold text-gray-600">الطرف الثاني (المقاول)</label>
+                <input type="text" id="contractor_name" class="w-full p-2 border-b-2 border-gray-200 focus:border-blue-500 outline-none bg-transparent" placeholder="اسم المقاول أو الشركة" />
+                <input type="text" id="contractor_cr" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="السجل التجاري / التصنيف" />
+                <input type="text" id="contractor_address" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="العنوان" />
+                <input type="text" id="contractor_phone" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="الهاتف" />
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6 mt-6">
+              <div>
+                <label class="font-semibold text-gray-600">الطرف الثالث (الاستشاري)</label>
+                <input type="text" id="consultant_name" class="w-full p-2 border-b-2 border-gray-200" placeholder="اسم المكتب الاستشاري" />
+                <input type="text" id="consultant_reg" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="الترخيص / السجل" />
+                <input type="text" id="consultant_phone" class="w-full p-2 border-b-2 border-gray-200 mt-2" placeholder="الهاتف" />
+              </div>
+              <div>
+                <label class="font-semibold text-gray-600">نطاق الإشراف</label>
+                <textarea id="supervision_scope" class="w-full p-2 border rounded" rows="4" placeholder="زيارات دورية، اعتماد المخططات والتغييرات، محاضر اجتماعات، شهادات إنجاز..."></textarea>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section 2: Subject -->
+        <details id="section2" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (2): موضوع العقد</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (2): موضوع العقد</h2>
+            <p class="mb-4">يتعهد الطرف الثاني بإنشاء مبنى سكني من طابق واحد وفق المخططات والمواصفات المعتمدة، على قطعة الأرض رقم
+              <input type="text" id="plot_no" class="inline-block w-24 p-1 border-b text-center" placeholder="..." />
+              بالمربع
+              <input type="text" id="block_no" class="inline-block w-24 p-1 border-b text-center" placeholder="..." />
+              بولاية
+              <input type="text" id="wilayah" class="inline-block w-32 p-1 border-b text-center" placeholder="..." />،
+              بمساحة بناء إجمالية
+              <input type="number" id="built_area" class="inline-block w-28 p-1 border-b text-center" placeholder="000" /> م²،
+              وفقًا لإباحة البناء رقم
+              <input type="text" id="permit_no" class="inline-block w-32 p-1 border-b text-center" placeholder="..." />.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-sm text-slate-600">القيمة الإجمالية (ر.ع)</span>
+                <input type="number" id="total_cost_number" class="w-full p-2 border rounded" placeholder="00000" />
+              </label>
+              <label class="block">
+                <span class="text-sm text-slate-600">القيمة بالحروف</span>
+                <input type="text" id="total_cost_text" class="w-full p-2 border rounded" placeholder="—" />
+              </label>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section 3: Owner obligations -->
+        <details id="section3" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (3): التزامات الطرف الأول (المالك)</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (3): التزامات الطرف الأول (المالك)</h2>
+            <ol class="list-decimal list-inside space-y-2">
+              <li>تنفيذ أعمال حفر الأساسات والسور وردمها بحسب المخططات.</li>
+              <li>تسوية أرضية الحوش بالكامل بعد انتهاء جميع أعمال البناء.</li>
+              <li>توفير المياه والكهرباء للموقع طوال فترة التنفيذ.</li>
+              <li>تحمل فروقات التكلفة إذا طُلِب استخدام الخرسانة الجاهزة بدل الخلط الموقعي.</li>
+              <li>سداد الدفعات في مواعيدها وفق جدول الدفعات المعتمد.</li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- Section 4: Contractor obligations -->
+        <details id="section4" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (4): التزامات الطرف الثاني (المقاول)</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (4): التزامات الطرف الثاني (المقاول)</h2>
+            <ol class="list-decimal list-inside space-y-2">
+              <li>توفير جميع مواد البناء وتنفيذ الأعمال طبقًا للمخططات والمواصفات.</li>
+              <li>عدم التنازل أو التعاقد من الباطن إلا بموافقة خطية من المالك.</li>
+              <li>استخدام آلة الرص (كومبكتر) قبل صب القواعد وبعد الردم.</li>
+              <li>استخدام أخشاب جديدة للأسقف، وسمك صبية السقف 12 سم على الأقل.</li>
+              <li>تنفيذ الصب بالخلّاطة الموقعيّة أو الخرسانة الجاهزة إذا طلب المالك.</li>
+              <li>إنجاز كافة التمديدات الصحية والكهربائية والأصباغ بالجودة المطلوبة.</li>
+              <li>إنشاء خزان الصرف وتمديداته حسب المخططات.</li>
+              <li>تحمل إعادة العمل غير المطابق للجودة على نفقته.</li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- Section 5: Specs -->
+        <details id="section5" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (5): المواد والمواصفات الفنية</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (5): المواد والمواصفات الفنية</h2>
+            <ul class="list-disc list-inside space-y-3">
+              <li><b>الحديد:</b> تركي أو عُماني.</li>
+              <li><b>السيراميك:</b> إسباني بسعر لا يتجاوز <input type="number" value="9" class="inline-block w-20 p-1 border-b-2 text-center" /> ر.ع/م².</li>
+              <li><b>الأدوات الصحية:</b> طقم رئيسي <input type="number" value="300" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع، باقي الحمامات <input type="number" value="150" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع/للطقم.</li>
+              <li><b>الأدوات الكهربائية:</b> مفاتيح KDK، مصابيح Philips، مراوح TERPPT، سخانات Hotex.</li>
+              <li><b>الأبواب والنوافذ:</b> باب المجلس <input type="number" value="600" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع، الرئيسي <input type="number" value="700" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع، باقي الأبواب <input type="number" value="200" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع، النوافذ <input type="number" value="200" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع.</li>
+              <li><b>بلاط السطح:</b> من بلاط النصر.</li>
+              <li><b>أعمال إضافية (اختيارية):</b> جرانيت للدرج <input type="number" value="12" class="inline-block w-20 p-1 border-b-2 text-center" /> ر.ع/م²، رخام <input type="number" value="10" class="inline-block w-20 p-1 border-b-2 text-center" /> ر.ع/م²، باب سور <input type="number" value="400" class="inline-block w-24 p-1 border-b-2 text-center" /> ر.ع، مظلة سيارة <input type="number" value="1500" class="inline-block w-28 p-1 border-b-2 text-center" /> ر.ع، ديكور <input type="number" value="3500" class="inline-block w-28 p-1 border-b-2 text-center" /> ر.ع، مطبخ <input type="number" value="2500" class="inline-block w-28 p-1 border-b-2 text-center" /> ر.ع.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Section 6: Payments -->
+        <details id="section6" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (6): الدفعات المالية</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (6): الدفعات المالية</h2>
+            <p class="text-sm text-slate-600 mb-3">يمكن إدخال النسب وسيتم احتساب المبالغ تلقائيًا من القيمة الإجمالية.</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm border">
+                <thead class="bg-slate-100">
+                  <tr>
+                    <th class="p-2 border">المرحلة</th>
+                    <th class="p-2 border">النسبة %</th>
+                    <th class="p-2 border">المبلغ (ر.ع)</th>
+                    <th class="p-2 border">الشرط</th>
+                  </tr>
+                </thead>
+                <tbody id="paymentsTable">
+                  <!-- سيملأ بالسكربت -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section 7: Guarantees & LD -->
+        <details id="section7" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (7): الضمانات والغرامات والاحتجاز</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200 space-y-4">
+            <h2 class="hidden print-title">المادة (7): الضمانات والغرامات والاحتجاز</h2>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <label class="block">
+                <span class="text-sm text-slate-600">نسبة الدفعة المُحتجزة (Retention)</span>
+                <input type="number" id="retention_pct" class="w-full p-2 border rounded" min="0" max="10" value="5" />
+              </label>
+              <label class="block">
+                <span class="text-sm text-slate-600">مدة ضمان العيوب (أشهر)</span>
+                <input type="number" id="defects_months" class="w-full p-2 border rounded" min="6" value="12" />
+              </label>
+              <label class="block">
+                <span class="text-sm text-slate-600">غرامة التأخير (ر.ع/يوم)</span>
+                <input type="number" id="ld_per_day" class="w-full p-2 border rounded" min="0" value="10" />
+              </label>
+            </div>
+            <ol class="list-decimal list-inside space-y-2">
+              <li>يحتجز المالك نسبة <span id="retention_view">5</span>% من كل دفعة، وتُصرف بعد انتهاء فترة الضمان وخلو الأعمال من العيوب.</li>
+              <li>فترة ضمان العيوب <span id="defects_view">12</span> شهرًا من تاريخ الاستلام النهائي.</li>
+              <li>تُطبَّق غرامة تأخير قدرها <span id="ld_view">10</span> ر.ع عن كل يوم تأخير بعد المدة التعاقدية، بحد أقصى 10% من قيمة العقد ما لم يتفق على غير ذلك.</li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- Section 8: General terms -->
+        <details id="section8" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (8): أحكام عامة</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200 space-y-3">
+            <h2 class="hidden print-title">المادة (8): أحكام عامة</h2>
+            <ol class="list-decimal list-inside space-y-2">
+              <li>لا يُجرى أي تعديل إلا بمذكرة تغييرات خطية معتمدة من جميع الأطراف وتحديد الأثر المالي والزمني.</li>
+              <li>القوة القاهرة: تُعلّق الالتزامات خلال وقوع الحدث القاهر وفق الأعراف، ويُمدد الزمن بما يتناسب.</li>
+              <li>القانون الواجب التطبيق والاختصاص: تسري أحكام القوانين المعمول بها في سلطنة عُمان ويكون الاختصاص للمحاكم المختصة.</li>
+              <li>حقوق الملكية الفكرية للمخططات والرسومات محفوظة لأصحابها.</li>
+              <li>هذا العقد وملحقاته يشكلان الاتفاق الكامل ويلغي أي تفاهمات سابقة بشأن موضوعه.</li>
+            </ol>
+            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded">
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" id="auto_renew_toggle" class="w-4 h-4" />
+                <span>إضافة بند <b>تجديد تلقائي</b> للعقود القابلة للتجديد (اختياري)</span>
+              </label>
+              <p id="auto_renew_text" class="mt-2 hidden text-sm text-slate-700">يتجدد هذا العقد تلقائيًا لمدة مماثلة بذات الشروط ما لم يُخطر أحد الطرفين الطرف الآخر بعدم الرغبة بالتجديد قبل <input type="number" id="nonrenew_days" class="inline-block w-20 p-1 border-b text-center" value="30" /> يومًا على الأقل من تاريخ الانتهاء.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section 9: Attachments -->
+        <details id="section9" class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          <summary class="flex justify-between items-center p-5 bg-white hover:bg-gray-50 cursor-pointer">
+            <h2 class="text-xl font-bold text-slate-700 m-0">المادة (9): المرفقات</h2>
+            <i class="fa-solid fa-chevron-down accordion-arrow transition-transform"></i>
+          </summary>
+          <div class="p-6 border-t border-gray-200">
+            <h2 class="hidden print-title">المادة (9): المرفقات</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>ملحق (أ): المخططات والرسومات المعتمدة.</li>
+              <li>ملحق (ب): جدول المواصفات والكميات (BOQ) – إن وجد.</li>
+              <li>ملحق (ج): جدول الدفعات التفصيلي ومحاضر الاستلام المرحلي.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Section 10: Signatures -->
+        <section id="section10" class="pt-10 mt-10 border-t-2 border-dashed">
+          <h2 class="text-xl font-bold text-slate-700 text-center">المادة (10): التوقيعات</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center mt-12">
+            <div>
+              <p class="font-bold">الطرف الأول (المالك)</p>
+              <p class="mt-2 h-6 font-semibold" id="owner_name_print"></p>
+              <div class="mt-16 border-b border-gray-500"></div>
+              <p class="mt-2 text-sm text-gray-600">التوقيع</p>
+            </div>
+            <div>
+              <p class="font-bold">الطرف الثاني (المقاول)</p>
+              <p class="mt-2 h-6 font-semibold" id="contractor_name_print"></p>
+              <div class="mt-16 border-b border-gray-500"></div>
+              <p class="mt-2 text-sm text-gray-600">التوقيع</p>
+            </div>
+            <div>
+              <p class="font-bold">الطرف الثالث (الاستشاري)</p>
+              <p class="mt-2 h-6 font-semibold" id="consultant_name_print"></p>
+              <div class="mt-16 border-b border-gray-500"></div>
+              <p class="mt-2 text-sm text-gray-600">التوقيع</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ————— Helpers —————
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const STORAGE_KEY = 'contract_build_v2';
+    const debounce = (fn, d=300) => { let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), d); }; };
+
+    function toArabicDigits(num) {
+      try { return Number(num).toLocaleString('ar-EG-u-nu-latn'); } catch { return num; }
+    }
+
+    // ————— Build Payments Table —————
+    const defaultStages = [
+      ['الدفعة الأولى (مقدم)', 10, 'عند توقيع العقد'],
+      ['الأساسات', 10, 'بعد إنجاز الأساسات'],
+      ['الكرسي والجسور', 10, 'بعد إنجاز الكرسي والجسور'],
+      ['الطابوق', 15, 'بعد إنجاز الطابوق'],
+      ['صب السقف', 15, 'بعد صب السقف'],
+      ['الوراش', 10, 'بعد إنجاز الوراش'],
+      ['البلاستر', 10, 'بعد إنجاز البلاستر'],
+      ['السيراميك', 8, 'بعد تركيب السيراميك'],
+      ['الأدوات الصحية والكهربائية', 7, 'بعد التركيب'],
+      ['التسليم النهائي', 5, 'عند التسليم النهائي']
+    ];
+
+    function buildPaymentsRows() {
+      const tbody = $('#paymentsTable');
+      tbody.innerHTML = '';
+      defaultStages.forEach((stg, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="p-2 border">${stg[0]}</td>
+          <td class="p-2 border"><input type="number" class="pct w-24 p-1 border rounded" value="${stg[1]}" min="0" max="100" /></td>
+          <td class="p-2 border"><input type="number" class="amt w-40 p-1 border rounded" placeholder="0" /></td>
+          <td class="p-2 border"><input type="text" class="cond w-full p-1 border rounded" value="${stg[2]}" /></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      recalcAmounts();
+    }
+
+    function recalcAmounts() {
+      const total = Number($('#total_cost_number')?.value || 0);
+      $$('#paymentsTable tr').forEach(tr => {
+        const pctEl = $('.pct', tr); const amtEl = $('.amt', tr);
+        const pct = Number(pctEl.value || 0);
+        if (total > 0) amtEl.value = (total * pct / 100).toFixed(3);
+      });
+      // retention view
+      $('#retention_view').textContent = $('#retention_pct').value || 5;
+      $('#defects_view').textContent = $('#defects_months').value || 12;
+      $('#ld_view').textContent = $('#ld_per_day').value || 0;
+    }
+
+    // ————— Export Prep —————
+    function prepareExportContent() {
+      const form = document.getElementById('contract-form');
+      const formToExport = form.cloneNode(true);
+      formToExport.classList.add('export-content');
+
+      // Replace inputs/textarea with spans
+      formToExport.querySelectorAll('input, textarea').forEach(input => {
+        if (input.closest('nav')) return; // ignore sidebar controls
+        const value = (input.type === 'checkbox') ? (input.checked ? '✔' : '') : (input.value || '').trim();
+        const span = document.createElement('span');
+        span.className = 'printable-value';
+        if (value) {
+          if (input.type === 'date') {
+            span.textContent = new Date(value).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+          } else if (input.type === 'number') {
+            span.textContent = toArabicDigits(value);
+          } else {
+            span.textContent = value;
+          }
+        } else {
+          span.textContent = '................';
+        }
+        input.parentNode.replaceChild(span, input);
+      });
+
+      formToExport.querySelectorAll('details').forEach(d => d.setAttribute('open', ''));
+      // Show auto-renew text if toggled
+      if (!$('#auto_renew_toggle').checked) {
+        formToExport.querySelector('#auto_renew_text')?.remove();
+      }
+      return formToExport;
+    }
+
+    // ————— Validation —————
+    function validateRequired() {
+      const requiredIds = ['contract_date', 'owner_name', 'contractor_name', 'total_cost_number'];
+      const missing = requiredIds.filter(id => !document.getElementById(id).value);
+      if (missing.length) {
+        alert('يرجى استكمال الحقول الأساسية: تاريخ العقد، المالك، المقاول، القيمة الإجمالية.');
+        return false;
+      }
+      return true;
+    }
+
+    // ————— Export Actions —————
+    function generatePDF() {
+      if (!validateRequired()) return;
+      const element = prepareExportContent();
+      const opt = { margin: [0.8, 0.5, 0.8, 0.5], filename: 'عقد-مقاولة-بناء.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, letterRendering: true }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
+      html2pdf().from(element).set(opt).save();
+    }
+
+    async function generateForGoogleDocs() {
+      if (!validateRequired()) return;
+      const element = prepareExportContent();
+      const contentHtml = `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"></head><body>${element.innerHTML}</body></html>`;
+      const fileBuffer = await htmlToDocx.asBlob(contentHtml, { orientation: 'portrait', margins: { top: 720, right: 720, bottom: 720, left: 720 } });
+      saveAs(fileBuffer, 'عقد-مقاولة-لجوجل.docx');
+      const instruction = document.getElementById('gdocs-instruction');
+      instruction.classList.remove('hidden');
+      setTimeout(() => instruction.classList.add('hidden'), 8000);
+    }
+
+    function saveAsEditableHTML() {
+      const docClone = document.documentElement.cloneNode(true);
+      docClone.querySelectorAll('input, textarea').forEach(cloneInput => {
+        const originalInput = document.getElementById(cloneInput.id);
+        if (!originalInput) return;
+        if (cloneInput.type === 'checkbox' || cloneInput.type === 'radio') {
+          if (originalInput.checked) cloneInput.setAttribute('checked', 'checked');
+        } else {
+          cloneInput.setAttribute('value', originalInput.value);
+        }
+      });
+      const blob = new Blob([docClone.outerHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'عقد-مقاولة-معدل.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    // ————— Autosave —————
+    function saveState() {
+      const data = {};
+      $$('input, textarea').forEach(inp => {
+        if (inp.type === 'checkbox') data[inp.id] = inp.checked;
+        else data[inp.id] = inp.value;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    const saveStateDebounced = debounce(saveState, 300);
+
+    function restoreState() {
+      try {
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        Object.entries(data).forEach(([id, val]) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          if (el.type === 'checkbox') el.checked = !!val; else el.value = val;
+        });
+      } catch { /* ignore */ }
+      syncNamesToSignature();
+      recalcAmounts();
+      $('#auto_renew_text').classList.toggle('hidden', !$('#auto_renew_toggle').checked);
+    }
+
+    function clearForm() {
+      if (!confirm('سيتم مسح جميع الحقول. هل أنت متأكد؟')) return;
+      $$('input, textarea').forEach(inp => {
+        if (inp.type === 'checkbox') inp.checked = false; else inp.value = '';
+      });
+      localStorage.removeItem(STORAGE_KEY);
+      buildPaymentsRows();
+      syncNamesToSignature();
+    }
+
+    function syncNamesToSignature() {
+      ['owner_name','contractor_name','consultant_name'].forEach(id => {
+        const src = document.getElementById(id);
+        const dst = document.getElementById(id + '_print');
+        if (src && dst) dst.textContent = src.value;
+      });
+    }
+
+    // ————— Events —————
+    document.addEventListener('DOMContentLoaded', () => {
+      buildPaymentsRows();
+      restoreState();
+
+      // listeners
+      document.body.addEventListener('input', e => {
+        if (e.target.matches('#total_cost_number, .pct')) recalcAmounts();
+        if (e.target.matches('#retention_pct, #defects_months, #ld_per_day')) recalcAmounts();
+        if (e.target.matches('#owner_name, #contractor_name, #consultant_name')) syncNamesToSignature();
+        saveStateDebounced();
+      });
+      document.body.addEventListener('change', e => {
+        if (e.target.matches('#auto_renew_toggle')) {
+          $('#auto_renew_text').classList.toggle('hidden', !e.target.checked);
+        }
+        saveStateDebounced();
+      });
+
+      // buttons
+      $('#btnPDF').addEventListener('click', generatePDF);
+      $('#btnGDocs').addEventListener('click', generateForGoogleDocs);
+      $('#btnSaveHTML').addEventListener('click', saveAsEditableHTML);
+      $('#btnClear').addEventListener('click', clearForm);
+    });
+  </script>
+</body>
+</html>
